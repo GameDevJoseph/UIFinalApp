@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-1387863194536813047
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 20215a7e94ca0684395d449e24fc37b8
+  m_EffectName: Attenuation
+  m_MixLevel: a2b23ed40e370ba4696c985d7f628f71
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -18,10 +32,13 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: e8c537a1f6d3aaf4792361f2f082f1ba
     name: BG_Music
+  - guid: 24db833de23e40a488612859eab11b8e
+    name: SFX
   m_AudioMixerGroupViews:
   - guids:
     - 082c8f9328850694499eb44a82da365c
     - 5f9f479e1c43bce439482a16c4842d88
+    - 9fd377c0775d687458a42bd47f345d2a
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -36,6 +53,7 @@ AudioMixerGroupController:
   m_GroupID: 082c8f9328850694499eb44a82da365c
   m_Children:
   - {fileID: 8334008132982285340}
+  - {fileID: 3581286060744791465}
   m_Volume: c056a3d8aa245a3428755b8acc720941
   m_Pitch: 164a8d88dc785a842937e8757baef01d
   m_Send: 00000000000000000000000000000000
@@ -71,6 +89,25 @@ AudioMixerSnapshotController:
   m_FloatValues:
     e8c537a1f6d3aaf4792361f2f082f1ba: -0.27209902
   m_TransitionOverrides: {}
+--- !u!243 &3581286060744791465
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 9fd377c0775d687458a42bd47f345d2a
+  m_Children: []
+  m_Volume: 24db833de23e40a488612859eab11b8e
+  m_Pitch: 93ea1162e51395d44a54aede27b5af1a
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -1387863194536813047}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &6661615041899840707
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
