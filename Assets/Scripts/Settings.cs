@@ -14,10 +14,23 @@ public class Settings : MonoBehaviour
     public void BGMusicMixerController()
     {
         _musicMixer.SetFloat("BG_Music", _bgMusicSlider.value);
+        PlayerPrefs.SetFloat("BGMusicVolume", _bgMusicSlider.value);
     }
 
     public void SFXVolumeMixerController()
     {
         _musicMixer.SetFloat("SFX", _sfxVolumeSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", _sfxVolumeSlider.value);
+    }
+
+
+    public void LoadBGVolumeValue()
+    {
+        _bgMusicSlider.value = PlayerPrefs.GetFloat("BGMusicVolume");
+    }
+
+    public void LoadSFXVolumeValue()
+    {
+        _sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume");
     }
 }

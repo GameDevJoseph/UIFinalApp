@@ -18,4 +18,9 @@ public class NumberValues : MonoBehaviour
     {
         _imageDrop = image;
     }
+
+    public Sprite RevealImageValue()
+    {
+        return _imageDrop.sprite;
+    }
 }

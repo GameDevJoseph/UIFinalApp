@@ -11,6 +11,9 @@ public class Drop : MonoBehaviour, IDropHandler
     bool _canStack = true;
     int placedNumber;
 
+    [SerializeField] AudioSource _sfxSource;
+    [SerializeField] AudioClip _droppedInAudio;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (_canStack)
@@ -18,6 +21,7 @@ public class Drop : MonoBehaviour, IDropHandler
             eventData.pointerDrag.GetComponent<Draggable>().StartingPos = _image.rectTransform.localPosition;
             placedNumber = eventData.pointerDrag.GetComponent<NumberValues>().NumberValue;
             _canStack = false;
+            _sfxSource.PlayOneShot(_droppedInAudio);
         }
     }
 
@@ -27,5 +31,13 @@ public class Drop : MonoBehaviour, IDropHandler
     {
         _image = GetComponent<Image>();
         _canStack = true;
+    }
+
+    public bool CheckNumber()
+    {
+        if(placedNumber == _number)
+            return true;
+        else
+            return false;
     }
 }
