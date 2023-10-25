@@ -10,6 +10,8 @@ public class Profile : MonoBehaviour
     [SerializeField] TMP_Text _userNameDisplay;
     [SerializeField] TMP_Text[] _GameStats;
 
+    [SerializeField] TMP_Text _debugText;
+
     string[] _users;
 
 
@@ -53,32 +55,79 @@ public class Profile : MonoBehaviour
     
     public void EnterSlotOne()
     {
-        _profiles[0].text = _nameFields[0].text;
-        _nameFields[0].gameObject.SetActive(false);
-        _users[0] = _nameFields[0].text;
+        if (_nameFields[0].text != string.Empty)
+        {
 
-        PlayerPrefs.SetString("User1", _users[0]); ;
-        PlayerPrefs.Save();
+            if (_nameFields[0].text == _profiles[1].text || _nameFields[0].text == _profiles[2].text)
+            {
+                _debugText.text = "Profile already exist";
+                return;
+            }
+            else
+            {
+                _debugText.text = "";
+
+                _profiles[0].text = _nameFields[0].text;
+                _nameFields[0].gameObject.SetActive(false);
+                _users[0] = _nameFields[0].text;
+
+                _nameFields[0].gameObject.SetActive(false);
+                _profiles[0].transform.parent.gameObject.SetActive(true);
+
+                PlayerPrefs.SetString("User1", _users[0]);
+                PlayerPrefs.Save();
+            }
+        }
     }
 
     public void EnterSlotTwo()
     {
-        _profiles[1].text = _nameFields[1].text;
-        _nameFields[1].gameObject.SetActive(false);
-        _users[1] = _nameFields[1].text;
+        if (_nameFields[1].text != string.Empty)
+        {
+            if (_nameFields[1].text == _profiles[2].text || _nameFields[1].text == _profiles[0].text)
+            {
+                _debugText.text = "Profile already exist";
+                return;
+            }
+            else
+            {
+                _debugText.text = "";
+                _profiles[1].text = _nameFields[1].text;
+                _nameFields[1].gameObject.SetActive(false);
+                _users[1] = _nameFields[1].text;
 
-        PlayerPrefs.SetString("User2", _users[1]);
-        PlayerPrefs.Save();
+                _nameFields[1].gameObject.SetActive(false);
+                _profiles[1].transform.parent.gameObject.SetActive(true);
+
+                PlayerPrefs.SetString("User2", _users[1]);
+                PlayerPrefs.Save();
+            }
+        }
     }
 
     public void EnterSlotThree()
     {
-        _profiles[2].text = _nameFields[2].text;
-        _nameFields[2].gameObject.SetActive(false);
-        _users[2] = _nameFields[2].text;
+        if (_nameFields[1].text != string.Empty)
+        {
+            if (_nameFields[2].text == _profiles[1].text || _nameFields[2].text == _profiles[0].text)
+            {
+                _debugText.text = "Profile already exist";
+                return;
+            }
+            else
+            {
+                _debugText.text = "";
+                _profiles[2].text = _nameFields[2].text;
+                _nameFields[2].gameObject.SetActive(false);
+                _users[2] = _nameFields[2].text;
 
-        PlayerPrefs.SetString("User3", _users[2]);
-        PlayerPrefs.Save();
+                _nameFields[2].gameObject.SetActive(false);
+                _profiles[2].transform.parent.gameObject.SetActive(true);
+
+                PlayerPrefs.SetString("User3", _users[2]);
+                PlayerPrefs.Save();
+            }
+        }
     }
 
     public void SelectUserOne()
