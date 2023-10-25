@@ -25,6 +25,8 @@ public class MatchGameManager : MonoBehaviour
 
     [SerializeField] AudioClip _incorrectAudio;
 
+    [SerializeField] GameObject _statsGameobject;
+
     bool _isCheckingMatch = false;
     float _countdownTimer;
     int _minutes;
@@ -32,6 +34,7 @@ public class MatchGameManager : MonoBehaviour
     string _player;
 
     bool _isAllMatched = false;
+    bool _hasStarted = false;
 
     private void Start()
     {
@@ -49,6 +52,12 @@ public class MatchGameManager : MonoBehaviour
 
     public void Check(MatchID match)
     {
+        if (!_hasStarted)
+            return;
+
+        if (_matches[0] != null && _matches[1] != null)
+            return;
+
         if (_matches[0] == null)
         {
             _matches[0] = match;
@@ -56,17 +65,22 @@ public class MatchGameManager : MonoBehaviour
         }
         else if (_matches[0] != null && _matches[1] == null)
         {
+            
             _matches[1] = match;
             match.GetComponent<Image>().sprite = _matchSprites[match.MatchIDNumber];
             CheckCorrectMatch();
         }
         _sfxSource.PlayOneShot(_selectAudio);
+
     }
 
     private void Update()
     {
 
         if (_isAllMatched)
+            return;
+
+        if (!_hasStarted)
             return;
 
         _countdownTimer += Time.deltaTime;
@@ -131,17 +145,25 @@ public class MatchGameManager : MonoBehaviour
         {
             _isAllMatched = true;
             PlayerPrefs.SetString("User" + _player + "FastestTime", _timerText.text);
+            _statsGameobject.SetActive(true);
+            _statsGameobject.GetComponentInChildren<TMP_Text>().text = "You found all the matches in" + _timerText.text;
+            PauseGame(0);
         }
     }
 
-    public void MainMenuButton()
+    public void LoadButton(string sceneName)
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(sceneName);
     }
 
     public void PauseGame(int value)
     {
         Time.timeScale = value;
+    }
+
+    public void StartGame()
+    {
+        _hasStarted = true;
     }
     
 }

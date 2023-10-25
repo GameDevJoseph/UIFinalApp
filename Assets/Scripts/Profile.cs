@@ -174,7 +174,7 @@ public class Profile : MonoBehaviour
     void AcquireStats(int userNumber)
     {
         _GameStats[userNumber].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
-        PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+        PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " is highest correct time";
 
         _GameStats[1].text = PlayerPrefs.GetString("User" + _selectedUser + "FastestTime") + " Is your fastest time";
     }
