@@ -8,7 +8,7 @@ public class Profile : MonoBehaviour
     [SerializeField] TMP_InputField[] _nameFields;
     [SerializeField] TMP_Text[] _profiles;
     [SerializeField] TMP_Text _userNameDisplay;
-    [SerializeField] TMP_Text[] _Game1Stats;
+    [SerializeField] TMP_Text[] _GameStats;
 
     string[] _users;
 
@@ -88,8 +88,12 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        _Game1Stats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
-        PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
+        PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+
+        _GameStats[1].text = PlayerPrefs.GetString("User" + _selectedUser + "FastestTime") + " Is your fastest time";
+
+        
     }
 
     public void SelectUserTwo()
@@ -100,7 +104,7 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        _Game1Stats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
+        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
         PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
     }
 
@@ -112,7 +116,7 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        _Game1Stats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
+        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
         PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
     }
 

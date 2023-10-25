@@ -26,12 +26,12 @@ public class DraggableGameManager : MonoBehaviour
     bool _isBeingDisplayed;
     bool _timerOn;
     int _correctAnswers;
-    
+    int _minutes;
 
     private void Start()
     {
         RandomizeImages();
-        _counterText.text = Mathf.FloorToInt(_countdownTimer % 60).ToString();
+        _counterText.text = _minutes + ":" + Mathf.FloorToInt(_countdownTimer % 60).ToString();
         _statsObject.gameObject.SetActive(false);
         _player = PlayerPrefs.GetString("CurrentUser");
     }
@@ -119,7 +119,14 @@ public class DraggableGameManager : MonoBehaviour
         }else if(!_isBeingDisplayed && _timerOn)
         {
             _countdownTimer += Time.deltaTime;
-            _counterText.text = Mathf.FloorToInt(_countdownTimer % 60).ToString();
+            
+            if (_countdownTimer > 59)
+            {
+                _countdownTimer = 0;
+                _minutes += 1;
+            }
+
+            _counterText.text = _minutes + ":" + Mathf.FloorToInt(_countdownTimer % 60).ToString();
         }
 
          
@@ -148,7 +155,7 @@ public class DraggableGameManager : MonoBehaviour
         if (_correctAnswers > PlayerPrefs.GetInt("User" + _player + "HighestCorrectAmount"))
         {
             PlayerPrefs.SetInt("User" + _player + "HighestCorrectAmount", _correctAnswers);
-            PlayerPrefs.SetFloat("User" + _player + "TimeForHighestCorrect", _countdownTimer);
+            PlayerPrefs.SetString("User" + _player + "TimeForHighestCorrect", _counterText.text);
         }
 
     }
