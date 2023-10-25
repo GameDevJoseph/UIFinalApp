@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class NumberValues : MonoBehaviour
 {
-    [SerializeField] int numberValue;
+    [SerializeField] int _numberValue;
     [SerializeField] Image _imageDrop;
 
-    public int NumberValue { get { return numberValue; } }  
+    public int NumberValue { get { return _numberValue; } }  
     public void AssignValue(int value)
     {
-        numberValue = value;
+        _numberValue = value;
     }
 
     public void AssignImageDrop(Image image)
