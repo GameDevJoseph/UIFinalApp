@@ -170,5 +170,9 @@ public class DraggableGameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    
+    public void PauseGame(int value)
+    {
+        Time.timeScale = value;
+    }
+
 }

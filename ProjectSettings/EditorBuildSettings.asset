@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DraggableGame.unity
     guid: 272a409fd5396cc428abd63b5c4ecc2d
+  - enabled: 1
+    path: Assets/Scenes/MatchGame.unity
+    guid: 34a6a951c82c29a469515d11eab5965a
   m_configObjects: {}

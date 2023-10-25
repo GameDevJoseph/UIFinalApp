@@ -33,7 +33,9 @@ public class Profile : MonoBehaviour
         _userNameDisplay.text = _selectedUser;
     }
 
-    public string _selectedUser;
+    string _selectedUser;
+
+    public string SelectedUser { get { return _selectedUser; } }    
 
     public void Load()
     {
@@ -88,11 +90,7 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
-        PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
-
-        _GameStats[1].text = PlayerPrefs.GetString("User" + _selectedUser + "FastestTime") + " Is your fastest time";
-
+        AcquireStats(0);
         
     }
 
@@ -104,8 +102,7 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
-        PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+        AcquireStats(1);
     }
 
     public void SelectUserThree()
@@ -116,14 +113,21 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
-        PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+        AcquireStats(2);
     }
 
     [ContextMenu("Delete All")]
     public void DeleteKeys()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    void AcquireStats(int userNumber)
+    {
+        _GameStats[userNumber].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
+        PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+
+        _GameStats[1].text = PlayerPrefs.GetString("User" + _selectedUser + "FastestTime") + " Is your fastest time";
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MatchGameManager : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class MatchGameManager : MonoBehaviour
     [SerializeField] List<GameObject> _spawnPrefabs = new List<GameObject>();
 
     [SerializeField] Transform _parentGrid;
+
+    [SerializeField] AudioSource _sfxSource;
+
+    [SerializeField] AudioClip _selectAudio;
+
+    [SerializeField] AudioClip _correctAudio;
+
+    [SerializeField] AudioClip _incorrectAudio;
 
     bool _isCheckingMatch = false;
     float _countdownTimer;
@@ -51,6 +60,7 @@ public class MatchGameManager : MonoBehaviour
             match.GetComponent<Image>().sprite = _matchSprites[match.MatchIDNumber];
             CheckCorrectMatch();
         }
+        _sfxSource.PlayOneShot(_selectAudio);
     }
 
     private void Update()
@@ -81,6 +91,7 @@ public class MatchGameManager : MonoBehaviour
             {
                 match.GetComponent<Image>().raycastTarget = false;
             }
+            _sfxSource.PlayOneShot(_correctAudio);
             _matchesLeft -= 1;
             ResetCheck();
             CheckIfAllFlipped();
@@ -88,6 +99,7 @@ public class MatchGameManager : MonoBehaviour
         }else
         {
             _isCheckingMatch = true;
+            _sfxSource.PlayOneShot(_incorrectAudio);
             StartCoroutine(WrongMatchFlip());   
         }
         
@@ -120,6 +132,16 @@ public class MatchGameManager : MonoBehaviour
             _isAllMatched = true;
             PlayerPrefs.SetString("User" + _player + "FastestTime", _timerText.text);
         }
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PauseGame(int value)
+    {
+        Time.timeScale = value;
     }
     
 }

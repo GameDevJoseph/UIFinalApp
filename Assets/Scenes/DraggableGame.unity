@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &16856167
 MonoBehaviour:
@@ -623,6 +623,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1447970373}
+        m_TargetAssemblyTypeName: DraggableGameManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &85447279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +799,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: e69e5cef07e5b0d47ad71c2d91ae0b30, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1447970373}
+        m_TargetAssemblyTypeName: DraggableGameManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1089,7 +1113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &267775303
 MonoBehaviour:
@@ -1192,7 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &268174843
 MonoBehaviour:
@@ -1504,7 +1528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &330214430
 MonoBehaviour:
@@ -1881,7 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &372990140
 MonoBehaviour:
@@ -2227,7 +2251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &486431124
 MonoBehaviour:
@@ -2463,7 +2487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &512877864
 MonoBehaviour:
@@ -2566,7 +2590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &527943740
 MonoBehaviour:
@@ -2705,7 +2729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &573579312
 MonoBehaviour:
@@ -3070,7 +3094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &732467167
 MonoBehaviour:
@@ -3805,7 +3829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &851048496
 MonoBehaviour:
@@ -4281,7 +4305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &962992067
 MonoBehaviour:
@@ -4518,7 +4542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1019295924
 MonoBehaviour:
@@ -5463,7 +5487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1292652494
 MonoBehaviour:
@@ -5566,7 +5590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1377807346
 MonoBehaviour:
@@ -5776,7 +5800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1451455690
 MonoBehaviour:
@@ -6302,7 +6326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1550187991
 MonoBehaviour:
@@ -6539,7 +6563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1624013027
 MonoBehaviour:
@@ -7133,6 +7157,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1447970373}
+        m_TargetAssemblyTypeName: DraggableGameManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1762514152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7260,7 +7296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1775547062
 MonoBehaviour:
@@ -7508,7 +7544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1861646374
 MonoBehaviour:
@@ -7702,7 +7738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e02d96b65ace743aa8acda4b647cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberValue: 0
+  _numberValue: 0
   _imageDrop: {fileID: 0}
 --- !u!114 &1928977543
 MonoBehaviour:
