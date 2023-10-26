@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class MathGameManager : MonoBehaviour
@@ -9,89 +10,29 @@ public class MathGameManager : MonoBehaviour
 
     [SerializeField] MathType _mathType;
 
-    [SerializeField] List<MultipleChoiceSelect> _choices = new List<MultipleChoiceSelect>();
+    
 
     int _value1;
     int _value2;
 
     int _correctAnswer;
-
-    [SerializeField] int[] _lastCreatedNumber;
+    int _correctAmount;
+    
 
     [SerializeField] TMP_Text _questionText;
+    [SerializeField] TMP_InputField _answerInput;
+    [SerializeField] TMP_Text _debugText;
 
+    float _maxTime = 300f;
     
 
     bool _isCorrectAssigned = false;
 
     private void Start()
     {
-        _lastCreatedNumber = new int[4];
-        _mathType = (MathType)Random.Range(0, 3);
-
-        switch (_mathType)
-        {
-            case MathType.Add: Add(); break;
-            case MathType.Sub: Subtract(); break;
-            case MathType.Multiply: Multiply(); break;
-            default: break;
-        }
-
-        for (int i = 0; i < _lastCreatedNumber.Length; i++)
-        {
-            var randomValue = Random.Range(0, _choices.Count);
-
-            if (!_isCorrectAssigned)
-            {
-                _choices[randomValue].Value = _correctAnswer;
-                _isCorrectAssigned = true;
-            }
-            else
-            {
-                var randomRange = Random.Range(1, 8);
-                var randomBool = Random.Range(0, 2);
-
-                if (randomBool == 0)
-                {
-                    _choices[randomValue].Value = _correctAnswer + randomRange;
-
-                    foreach(var number in _lastCreatedNumber)
-                    {
-                        if(_choices[randomValue].Value == number)
-                        {
-                            _choices[randomValue].Value += Random.Range(1, 4);
-                        }
-                    }
-                }
-                else
-                {
-                    _choices[randomValue].Value = _correctAnswer - randomRange;
-
-                    foreach (var number in _lastCreatedNumber)
-                    {
-                        if (_choices[randomValue].Value == number)
-                        {
-                            _choices[randomValue].Value -= Random.Range(1, 4);
-                        }
-                    }
-                }
-            }
-
-            _lastCreatedNumber[i] = _choices[randomValue].Value;
-            _choices[randomValue].AssignText();
-            _choices.Remove(_choices[randomValue]);
-        }
-
-
+        GenerateQuestion();
     }
 
-    private void Update()
-    {
-        if (_choices.Count < 1)
-            return;
-
-        
-    }
 
     void Multiply()
     {
@@ -121,4 +62,36 @@ public class MathGameManager : MonoBehaviour
         _value2 = Random.Range(minValue, maxValue);
     }
 
+    public void GenerateQuestion()
+    {
+        _mathType = (MathType)Random.Range(0, 3);
+
+        switch (_mathType)
+        {
+            case MathType.Add: Add(); break;
+            case MathType.Sub: Subtract(); break;
+            case MathType.Multiply: Multiply(); break;
+            default: break;
+        }
+    }
+    public void ValueEntered()
+    {
+        if(_answerInput.text == _correctAnswer.ToString())
+        {
+            _correctAmount += 1;
+            _debugText.color = Color.green;
+            _debugText.text = "Correct";
+            GenerateQuestion();
+        }else
+        {
+            _answerInput.text = "";
+            _debugText.color = Color.red;
+            _debugText.text = "Incorrect";
+        }
+    }
+
+    public void OnInputSelect()
+    {
+        _answerInput.text = "";
+    }
 }
