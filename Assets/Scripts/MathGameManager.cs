@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MathGameManager : MonoBehaviour
 {
@@ -22,17 +23,27 @@ public class MathGameManager : MonoBehaviour
     [SerializeField] TMP_Text _questionText;
     [SerializeField] TMP_InputField _answerInput;
     [SerializeField] TMP_Text _debugText;
+    [SerializeField] Slider _timerSlider;
 
-    float _maxTime = 300f;
-    
+    [SerializeField] AudioSource _sfxSource;
+    [SerializeField] AudioClip _correctSfx;
+    [SerializeField] AudioClip _incorrectSfx;
 
-    bool _isCorrectAssigned = false;
+    [SerializeField] GameObject _stats;
+    [SerializeField] TMP_Text _statsText;
+
+    float _time = 120f;
+
+    string _player;
+
+    bool _hasGameStarted = false;
 
     private void Start()
     {
-        GenerateQuestion();
-    }
+        Time.timeScale = 1;
+        _player = PlayerPrefs.GetString("CurrentUser");
 
+    }
 
     void Multiply()
     {
@@ -62,6 +73,26 @@ public class MathGameManager : MonoBehaviour
         _value2 = Random.Range(minValue, maxValue);
     }
 
+    void Update()
+    {
+        if (!_hasGameStarted)
+            return;
+
+
+        _time -= Time.deltaTime;
+
+        _timerSlider.value = _time;
+
+        if(_time <= 0)
+        {
+            _stats.SetActive(true);
+            _statsText.text = _correctAmount.ToString() + " answered correctly in 2 mins";
+
+            PlayerPrefs.SetInt("User" + _player + "MostCorrect", _correctAmount);
+            Time.timeScale = 0;
+        }
+    }
+
     public void GenerateQuestion()
     {
         _mathType = (MathType)Random.Range(0, 3);
@@ -81,17 +112,36 @@ public class MathGameManager : MonoBehaviour
             _correctAmount += 1;
             _debugText.color = Color.green;
             _debugText.text = "Correct";
+            _answerInput.text = "";
+            _sfxSource.PlayOneShot(_correctSfx);
             GenerateQuestion();
         }else
         {
             _answerInput.text = "";
             _debugText.color = Color.red;
             _debugText.text = "Incorrect";
+            _sfxSource.PlayOneShot(_incorrectSfx);
         }
     }
 
     public void OnInputSelect()
     {
         _answerInput.text = "";
+    }
+
+    public void StartGame()
+    {
+        _hasGameStarted = true;
+        GenerateQuestion();
+    }
+
+    public void LoadLevel(string value)
+    {
+        SceneManager.LoadScene(value);
+    }
+
+    public void PauseGame(int value)
+    {
+        Time.timeScale = value;
     }
 }

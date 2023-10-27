@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MatchGame.unity
     guid: 34a6a951c82c29a469515d11eab5965a
+  - enabled: 1
+    path: Assets/Scenes/MathGame.unity
+    guid: b256a9cb18197a84b93f42a2e4ba216d
   m_configObjects: {}

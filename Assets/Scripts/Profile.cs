@@ -11,9 +11,12 @@ public class Profile : MonoBehaviour
     [SerializeField] TMP_Text[] _GameStats;
 
     [SerializeField] TMP_Text _debugText;
+    [SerializeField] GameObject[] _deleteButton;
+    [SerializeField] GameObject _deletePanel;
+    [SerializeField] TMP_Text _deleteConfirmationText;
 
     string[] _users;
-
+    int _deleteSlotValue;
 
     private void Start()
     {
@@ -134,7 +137,7 @@ public class Profile : MonoBehaviour
     {
         _selectedUser = _profiles[0].text;
         _userNameDisplay.text = _selectedUser;
-
+        _deleteButton[0].SetActive(true);
         
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
@@ -177,6 +180,45 @@ public class Profile : MonoBehaviour
         PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " is highest correct time";
 
         _GameStats[1].text = PlayerPrefs.GetString("User" + _selectedUser + "FastestTime") + " Is your fastest time";
+
+        _GameStats[2].text = PlayerPrefs.GetInt("User" + _selectedUser + "MostCorrect").ToString() + " answered correctly in 2 mins";
     }
 
+    public void DeleteUser()
+    {
+       
+        _profiles[_deleteSlotValue].transform.parent.gameObject.SetActive(false);
+        _profiles[_deleteSlotValue].text = "";
+        _nameFields[_deleteSlotValue].gameObject.SetActive(true);
+        _nameFields[_deleteSlotValue].text = "Enter Name...";
+       
+
+        PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "HighestCorrectAmount");
+        PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "TimeForHighestCorrect");
+        PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "FastestTime");
+        PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "MostCorrect");
+        PlayerPrefs.DeleteKey("User" + _deleteSlotValue);
+        _users[_deleteSlotValue] = null;
+        if (_selectedUser == _users[_deleteSlotValue])
+        {
+            _selectedUser = null;
+        }
+
+    }
+
+
+    public void EnableDeletePanel(int value)
+    {
+        _deleteConfirmationText.text = "Are you sure you want to delete the profile " + _users[value];
+        _deletePanel.SetActive(true);
+        _deleteSlotValue = value;
+    }
+
+    public void DisableDeletePanel()
+    {
+        _deleteConfirmationText.text = "";
+        _deletePanel.SetActive(false);
+       
+    }
 }
+
