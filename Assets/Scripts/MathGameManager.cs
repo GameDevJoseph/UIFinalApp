@@ -48,21 +48,30 @@ public class MathGameManager : MonoBehaviour
 
     void Multiply()
     {
-        RandomizeValues(1, 10);
+        RandomizeValues(1, 6);
         _correctAnswer = _value1 * _value2;
         _questionText.text = _value1.ToString() + " X " + _value2.ToString();
     }
 
     void Subtract()
     {
-        RandomizeValues(8, 50);
-        _correctAnswer = _value1 - _value2;
-        _questionText.text = _value1.ToString() + " - " + _value2.ToString();
+        RandomizeValues(8, 26);
+
+        if (_value2 > _value1)
+        {
+            _correctAnswer = _value2 - _value1;
+            _questionText.text = _value2.ToString() + " - " + _value1.ToString();
+        }
+        else
+        {
+            _correctAnswer = _value1 - _value2;
+            _questionText.text = _value1.ToString() + " - " + _value2.ToString();
+        }
     }
 
     void Add()
     {
-        RandomizeValues(8, 50);
+        RandomizeValues(8, 26);
         _correctAnswer = _value1 + _value2;
         _questionText.text = _value1.ToString() + " + " + _value2.ToString();
     }
@@ -89,8 +98,15 @@ public class MathGameManager : MonoBehaviour
             _stats.SetActive(true);
             _statsText.text = _correctAmount.ToString() + " answered correctly in 2 mins";
 
-            if(_correctAmount > PlayerPrefs.GetInt("User" + _player + "MostCorrect", _correctAmount))
+
+            if (PlayerPrefs.HasKey("User" + _player + "MostCorrect"))
+            {
+                if (_correctAmount > PlayerPrefs.GetInt("User" + _player + "MostCorrect"))
+                    PlayerPrefs.SetInt("User" + _player + "MostCorrect", _correctAmount);
+            }else
+            {
                 PlayerPrefs.SetInt("User" + _player + "MostCorrect", _correctAmount);
+            }
 
             Time.timeScale = 0;
         }

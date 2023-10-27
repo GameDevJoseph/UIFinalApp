@@ -152,9 +152,16 @@ public class DraggableGameManager : MonoBehaviour
         {
             _spawnSlots[i].GetComponent<Image>().sprite = _spawnSlots[i].GetComponent<NumberValues>().RevealImageValue();
         }
-        
 
-        if (_correctAnswers > PlayerPrefs.GetInt("User" + _player + "HighestCorrectAmount"))
+        if (PlayerPrefs.HasKey("User" + _player + "HighestCorrectAmount"))
+        {
+
+            if (_correctAnswers > PlayerPrefs.GetInt("User" + _player + "HighestCorrectAmount"))
+            {
+                PlayerPrefs.SetInt("User" + _player + "HighestCorrectAmount", _correctAnswers);
+                PlayerPrefs.SetFloat("User" + _player + "TimeForHighestCorrect", _countdownTimer);
+            }
+        }else
         {
             PlayerPrefs.SetInt("User" + _player + "HighestCorrectAmount", _correctAnswers);
             PlayerPrefs.SetFloat("User" + _player + "TimeForHighestCorrect", _countdownTimer);

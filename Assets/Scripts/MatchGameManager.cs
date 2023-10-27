@@ -137,10 +137,15 @@ public class MatchGameManager : MonoBehaviour
         if(_matchesLeft <= 0)
         {
             _isAllMatched = true;
-            
 
-            if(_countTimer < PlayerPrefs.GetFloat("User" + _player + "FastestTime", _countTimer))
+            if (PlayerPrefs.HasKey("User" + _player + "FastestTime"))
+            {
+                if (_countTimer < PlayerPrefs.GetFloat("User" + _player + "FastestTime"))
+                    PlayerPrefs.SetFloat("User" + _player + "FastestTime", _countTimer);
+            }else
+            {
                 PlayerPrefs.SetFloat("User" + _player + "FastestTime", _countTimer);
+            }
 
             _statsGameobject.SetActive(true);
             _statsText.text = "You found all the matches in " + _timerText.text;

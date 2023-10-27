@@ -178,9 +178,9 @@ public class Profile : MonoBehaviour
     void AcquireStats()
     {
         _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
-        PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect") + " sec is highest correct time";
+        PlayerPrefs.GetFloat("User" + _selectedUser + "TimeForHighestCorrect").ToString("F2") + " sec is highest correct time";
 
-        _GameStats[1].text = PlayerPrefs.GetFloat("User" + _selectedUser + "FastestTime") + " Is your fastest time";
+        _GameStats[1].text = PlayerPrefs.GetFloat("User" + _selectedUser + "FastestTime").ToString("F2") + " Is your fastest time";
 
         _GameStats[2].text = PlayerPrefs.GetInt("User" + _selectedUser + "MostCorrect").ToString() + " answered correctly in 2 mins";
     }

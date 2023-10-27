@@ -10,6 +10,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] Profile _profile;
     [SerializeField] Button _playGameButton;
 
+    
 
     private void Update()
     {
@@ -23,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         CheckForUser();
         _settings.LoadBGVolumeValue();
         _settings.LoadSFXVolumeValue();
@@ -34,5 +36,10 @@ public class MainMenuManager : MonoBehaviour
             _playGameButton.interactable = false;
         else
             _playGameButton.interactable = true;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
