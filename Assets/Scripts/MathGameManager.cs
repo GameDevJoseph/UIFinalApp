@@ -89,7 +89,9 @@ public class MathGameManager : MonoBehaviour
             _stats.SetActive(true);
             _statsText.text = _correctAmount.ToString() + " answered correctly in 2 mins";
 
-            PlayerPrefs.SetInt("User" + _player + "MostCorrect", _correctAmount);
+            if(_correctAmount > PlayerPrefs.GetInt("User" + _player + "MostCorrect", _correctAmount))
+                PlayerPrefs.SetInt("User" + _player + "MostCorrect", _correctAmount);
+
             Time.timeScale = 0;
         }
     }

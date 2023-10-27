@@ -20,7 +20,7 @@ public class MatchGameManager : MonoBehaviour
     [SerializeField] TMP_Text _statsText;
 
     bool _isCheckingMatch = false;
-    float _countdownTimer;
+    float _countTimer;
     int _minutes;
     int _matchesLeft = 16;
     string _player;
@@ -32,7 +32,7 @@ public class MatchGameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         _player = PlayerPrefs.GetString("CurrentUser");
-        _timerText.text = Mathf.FloorToInt(_countdownTimer % 60).ToString();
+        _timerText.text = _countTimer.ToString("F0");
         _matches = new MatchID[2];
         for(int i = 0; i < 32; i++)
         {
@@ -78,15 +78,11 @@ public class MatchGameManager : MonoBehaviour
         if (!_hasStarted)
             return;
 
-        _countdownTimer += Time.deltaTime;
+        _countTimer += Time.deltaTime;
 
-        if (_countdownTimer > 59)
-        {
-            _countdownTimer = 0;
-            _minutes += 1;
-        }
 
-        _timerText.text = _minutes + ":" + Mathf.FloorToInt(_countdownTimer % 60).ToString();
+
+        _timerText.text = _countTimer.ToString("F0");
     }
 
     public void CheckCorrectMatch()
@@ -141,9 +137,13 @@ public class MatchGameManager : MonoBehaviour
         if(_matchesLeft <= 0)
         {
             _isAllMatched = true;
-            PlayerPrefs.SetString("User" + _player + "FastestTime", _timerText.text);
+            
+
+            if(_countTimer < PlayerPrefs.GetFloat("User" + _player + "FastestTime", _countTimer))
+                PlayerPrefs.SetFloat("User" + _player + "FastestTime", _countTimer);
+
             _statsGameobject.SetActive(true);
-            _statsText.text = "You found all the matches in" + _timerText.text;
+            _statsText.text = "You found all the matches in " + _timerText.text;
             PauseGame(0);
         }
     }
