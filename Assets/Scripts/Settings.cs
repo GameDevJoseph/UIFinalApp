@@ -11,6 +11,12 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider _bgMusicSlider;
     [SerializeField] Slider _sfxVolumeSlider;
 
+    private void Start()
+    {
+        _bgMusicSlider.value = PlayerPrefs.GetFloat("BGMusicVolume");
+        _sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+    }
+
     public void BGMusicMixerController()
     {
         _musicMixer.SetFloat("BG_Music", _bgMusicSlider.value);

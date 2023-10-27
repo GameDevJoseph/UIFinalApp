@@ -24,38 +24,39 @@ public class Profile : MonoBehaviour
         Load();
         for (int i = 0; i < _profiles.Length; i++)
         {
-                if (_users[i] != string.Empty)
-                {
-                    _nameFields[i].gameObject.SetActive(false);
-                    _profiles[i].transform.parent.gameObject.SetActive(true);
-                }
-                else if(_users[i] == string.Empty)
-                {
-                    _nameFields[i].gameObject.SetActive(true);
-                    _profiles[i].transform.parent.gameObject.SetActive(false);
-                }
+            if (_users[i] != string.Empty)
+            {
+                _nameFields[i].gameObject.SetActive(false);
+                _profiles[i].transform.parent.gameObject.SetActive(true);
+            }
+            else if (_users[i] == "")
+            {
+                _nameFields[i].gameObject.SetActive(true);
+                _profiles[i].transform.parent.gameObject.SetActive(false);
+            }
         }
         _userNameDisplay.text = _selectedUser;
+
     }
 
     string _selectedUser;
 
-    public string SelectedUser { get { return _selectedUser; } }    
+    public string SelectedUser { get { return _selectedUser; } }
 
     public void Load()
     {
         _selectedUser = PlayerPrefs.GetString("CurrentUser");
+
         _users[0] = PlayerPrefs.GetString("User1");
-        _users[1] = PlayerPrefs.GetString("User2");
-        _users[2] = PlayerPrefs.GetString("User3");
-
         _profiles[0].text = _users[0];
-        _profiles[1].text = _users[1];
-        _profiles[2].text = _users[2];
 
-        
+        _users[1] = PlayerPrefs.GetString("User2");
+        _profiles[1].text = _users[1];
+
+        _users[2] = PlayerPrefs.GetString("User3");
+        _profiles[2].text = _users[2];
     }
-    
+
     public void EnterSlotOne()
     {
         if (_nameFields[0].text != string.Empty)
@@ -138,12 +139,12 @@ public class Profile : MonoBehaviour
         _selectedUser = _profiles[0].text;
         _userNameDisplay.text = _selectedUser;
         _deleteButton[0].SetActive(true);
-        
+
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        AcquireStats(0);
-        
+        AcquireStats();
+
     }
 
     public void SelectUserTwo()
@@ -154,7 +155,7 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        AcquireStats(1);
+        AcquireStats();
     }
 
     public void SelectUserThree()
@@ -165,7 +166,7 @@ public class Profile : MonoBehaviour
         PlayerPrefs.SetString("CurrentUser", _selectedUser);
         PlayerPrefs.Save();
 
-        AcquireStats(2);
+        AcquireStats();
     }
 
     [ContextMenu("Delete All")]
@@ -174,9 +175,9 @@ public class Profile : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
-    void AcquireStats(int userNumber)
+    void AcquireStats()
     {
-        _GameStats[userNumber].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
+        _GameStats[0].text = PlayerPrefs.GetInt("User" + _selectedUser + "HighestCorrectAmount").ToString() + " Correct " +
         PlayerPrefs.GetString("User" + _selectedUser + "TimeForHighestCorrect") + " is highest correct time";
 
         _GameStats[1].text = PlayerPrefs.GetString("User" + _selectedUser + "FastestTime") + " Is your fastest time";
@@ -184,25 +185,28 @@ public class Profile : MonoBehaviour
         _GameStats[2].text = PlayerPrefs.GetInt("User" + _selectedUser + "MostCorrect").ToString() + " answered correctly in 2 mins";
     }
 
+    
+
     public void DeleteUser()
     {
-       
+
         _profiles[_deleteSlotValue].transform.parent.gameObject.SetActive(false);
         _profiles[_deleteSlotValue].text = "";
         _nameFields[_deleteSlotValue].gameObject.SetActive(true);
         _nameFields[_deleteSlotValue].text = "Enter Name...";
-       
+
 
         PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "HighestCorrectAmount");
         PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "TimeForHighestCorrect");
         PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "FastestTime");
         PlayerPrefs.DeleteKey("User" + _users[_deleteSlotValue] + "MostCorrect");
-        PlayerPrefs.DeleteKey("User" + _deleteSlotValue);
+        PlayerPrefs.DeleteKey("User" + (_deleteSlotValue + 1));
         _users[_deleteSlotValue] = null;
-        if (_selectedUser == _users[_deleteSlotValue])
-        {
-            _selectedUser = null;
-        }
+        _selectedUser = string.Empty;
+        PlayerPrefs.SetString("CurrentUser", _selectedUser);
+        _userNameDisplay.text = "";
+        AcquireStats();
+        PlayerPrefs.Save();
 
     }
 
@@ -218,7 +222,6 @@ public class Profile : MonoBehaviour
     {
         _deleteConfirmationText.text = "";
         _deletePanel.SetActive(false);
-       
+
     }
 }
-

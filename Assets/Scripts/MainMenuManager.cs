@@ -30,7 +30,7 @@ public class MainMenuManager : MonoBehaviour
 
     void CheckForUser()
     {
-        if (_profile.SelectedUser == string.Empty)
+        if (_profile.SelectedUser == "")
             _playGameButton.interactable = false;
         else
             _playGameButton.interactable = true;

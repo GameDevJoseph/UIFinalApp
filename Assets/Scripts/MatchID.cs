@@ -9,8 +9,6 @@ public class MatchID : MonoBehaviour, IPointerClickHandler
 
     MatchGameManager _gameManager;
 
-    
-
     public int MatchIDNumber {get {return _matchID;}}
 
     void Start()

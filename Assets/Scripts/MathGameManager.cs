@@ -41,6 +41,7 @@ public class MathGameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        Time.timeScale = 1;
         _player = PlayerPrefs.GetString("CurrentUser");
 
     }

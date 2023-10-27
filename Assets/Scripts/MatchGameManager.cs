@@ -8,24 +8,16 @@ using UnityEngine.SceneManagement;
 public class MatchGameManager : MonoBehaviour
 {
     [SerializeField] MatchID[] _matches;
-
     [SerializeField] Sprite[] _matchSprites;
-
     [SerializeField] TMP_Text _timerText;
-
     [SerializeField] List<GameObject> _spawnPrefabs = new List<GameObject>();
-
     [SerializeField] Transform _parentGrid;
-
     [SerializeField] AudioSource _sfxSource;
-
     [SerializeField] AudioClip _selectAudio;
-
     [SerializeField] AudioClip _correctAudio;
-
     [SerializeField] AudioClip _incorrectAudio;
-
     [SerializeField] GameObject _statsGameobject;
+    [SerializeField] TMP_Text _statsText;
 
     bool _isCheckingMatch = false;
     float _countdownTimer;
@@ -38,6 +30,7 @@ public class MatchGameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         _player = PlayerPrefs.GetString("CurrentUser");
         _timerText.text = Mathf.FloorToInt(_countdownTimer % 60).ToString();
         _matches = new MatchID[2];
@@ -61,12 +54,14 @@ public class MatchGameManager : MonoBehaviour
         if (_matches[0] == null)
         {
             _matches[0] = match;
+            _matches[0].GetComponent<Image>().raycastTarget = false;
             match.GetComponent<Image>().sprite = _matchSprites[match.MatchIDNumber];
         }
         else if (_matches[0] != null && _matches[1] == null)
         {
-            
+
             _matches[1] = match;
+            _matches[1].GetComponent<Image>().raycastTarget = false;
             match.GetComponent<Image>().sprite = _matchSprites[match.MatchIDNumber];
             CheckCorrectMatch();
         }
@@ -112,6 +107,8 @@ public class MatchGameManager : MonoBehaviour
             
         }else
         {
+            _matches[0].GetComponent<Image>().raycastTarget = true;
+            _matches[1].GetComponent<Image>().raycastTarget = true;
             _isCheckingMatch = true;
             _sfxSource.PlayOneShot(_incorrectAudio);
             StartCoroutine(WrongMatchFlip());   
@@ -146,7 +143,7 @@ public class MatchGameManager : MonoBehaviour
             _isAllMatched = true;
             PlayerPrefs.SetString("User" + _player + "FastestTime", _timerText.text);
             _statsGameobject.SetActive(true);
-            _statsGameobject.GetComponentInChildren<TMP_Text>().text = "You found all the matches in" + _timerText.text;
+            _statsText.text = "You found all the matches in" + _timerText.text;
             PauseGame(0);
         }
     }

@@ -30,6 +30,7 @@ public class DraggableGameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         RandomizeImages();
         _counterText.text = _minutes + ":" + Mathf.FloorToInt(_countdownTimer % 60).ToString();
         _statsObject.gameObject.SetActive(false);
